@@ -1,0 +1,21 @@
+@import '~ngx-toastr/toastr';
+@keyframes slideOutLeft {
+  to {
+    transform: translate(-100%);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+.ng-enter {
+  animation: slideInRight 0.5s both ease-in;
+}
+.ng-leave {
+  animation: slideOutLeft 0.5s both ease-in;
+}

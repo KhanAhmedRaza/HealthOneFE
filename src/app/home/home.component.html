@@ -1,10 +1,41 @@
 <div class="container-fluid">
-  <div class="jumbotron text-center">
+  <div class="row">
+    <div class="col-sm-10 jumbotron">
+      <div class="d-flex justify-content-center h-100">
+        <div class="searchbar">
+          <input class="search_input" type="text" name="" placeholder="Search..." />
+          <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <div class="sidenav">
+        <div class="heading_2">Filters</div>
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" id="ageCheck" />
+          <label class="form-check-label" for="ageCheck">Age</label>
+        </div>
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" id="genderCheck" />
+          <label class="form-check-label" for="genderCheck">Gender</label>
+        </div>
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" id="outcomeCheck" />
+          <label class="form-check-label" for="outcomeCheck">Outcomes</label>
+        </div>
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" id="reactionCheck" />
+          <label class="form-check-label" for="reactionCheck">Reactions</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--<div class="jumbotron text-center">
     <h1>
-      <img class="logo" src="assets/ngx-rocket-logo.png" alt="angular logo"/>
+      <img class="logo" src="assets/OSFT-logo-01.png" alt="angular logo" />
       <span translate>Hello world !</span>
     </h1>
     <app-loader [isLoading]="isLoading"></app-loader>
-    <q [hidden]="isLoading">{{quote}}</q>
-  </div>
+    <q [hidden]="isLoading">{{ quote }}</q>
+  </div>-->
 </div>

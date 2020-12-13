@@ -27,3 +27,34 @@
     width: 100%;
   }
 }
+
+.logo {
+  width: 100px;
+}
+
+hr.new1 {
+  border-top: 1px solid black;
+}
+
+.hr-sect {
+  display: flex;
+  flex-basis: 100%;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.35);
+  margin: 8px 0;
+
+  &:before,
+  &:after {
+    content: "";
+    flex-grow: 1;
+    background: rgba(0, 0, 0, 0.35);
+    height: 1px;
+    font-size: 0;
+    line-height: 0;
+    margin: 0 8px;
+  }
+}
+
+img {
+  opacity: 1;
+}

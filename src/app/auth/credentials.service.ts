@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 
 export interface Credentials {
   // Customize received credentials here
-  username: string;
+  email: string;
   token: string;
+  password: string;
 }
 
 const credentialsKey = 'credentials';
@@ -13,10 +14,9 @@ const credentialsKey = 'credentials';
  * The Credentials interface should be replaced with proper implementation.
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CredentialsService {
-
   private _credentials: Credentials | null = null;
 
   constructor() {
@@ -60,5 +60,4 @@ export class CredentialsService {
       localStorage.removeItem(credentialsKey);
     }
   }
-
 }

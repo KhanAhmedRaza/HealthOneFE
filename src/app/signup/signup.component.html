@@ -1,0 +1,305 @@
+<!-- <div class="login-container bg-light">
+	<div class="login-box">
+		<div class="center">
+			<h1 class="text-center" translate>APP_NAME 
+			<img class="logo text-center" src="assets/OSTF-logo-acronym-web.jpg" alt="angular logo" />
+			</h1>
+   			 
+		</div>
+		
+		<div class="container">
+		<form class="" [formGroup]="signupForm" (ngSubmit)="register()">
+			<h2 class="mb-4 mt-0 text-center">Sign Up for Free</h2>
+			<div class="form-group">
+				<input type="text" id="fName" formControlName="firstName"
+					class="form-control pb_height-50 reverse" maxlength="100"
+					placeholder="First Name"> <span id="username-help"
+					class="form-text text-muted"></span>
+			</div>
+			<div class="form-group">
+				<input type="text" id="lName" formControlName="lastName"
+					class="form-control pb_height-50 reverse" maxlength="100"
+					placeholder="Last Name"> <span id="username-help"
+					class="form-text text-muted"></span>
+			</div>
+			<div class="form-group">
+				<input type="email" formControlName="email" id="signup"
+					class="form-control pb_height-50 reverse" maxlength="100"
+					placeholder="Email"> <span id="signup-help"
+					class="form-text text-muted"></span>
+			</div>
+			<div class="form-group">
+				<input type="password"  formControlName="password" id="password"
+					class="form-control pb_height-50 reverse business-val"
+					maxlength="20" placeholder="Password"> <span
+					id="business-help" class="form-text text-muted"></span>
+
+			</div>
+			<div class="form-group">
+				<div class="pb_select-wrap">
+					<select formControlName="profession" id="profession"
+						class="form-control pb_height-50 reverse">
+						<option>Select Profession</option>
+						<option value="1">MD</option>
+						<option value="2">Peidtriats</option>
+						<option value="3">Sergeon</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" value="1"
+						formControlName="terms" id="dsgvo"> <label class="form-check-label"
+						for="dsgvo"> Agree to terms and conditions </label>
+				</div>
+			</div>
+			<div class="form-group">
+				<input type="submit"
+					class="btn btn-primary btn-lg btn-block pb_btn-pill  btn-shadow-blue"
+					value="Register" [disabled]="!signupForm.valid" >
+			</div>
+		</form>
+		</div>
+	</div>
+</div> -->
+
+<div id="base" class="container-fluid">
+  <div class="signupheader">
+    <img id="u1_img" class="logo mt-2 mb-2 ml-2" src="assets/u28.png" tabindex="0" />
+    <!--  <a class="navbar-brand"  translate>APP_NAME 
+    </a> -->
+  </div>
+  <form [formGroup]="signupForm" (ngSubmit)="register()">
+    <div class="row">
+      <div class="col-sm-12">
+        <div id="u15" class="heading_2 mt-4 mb-3">
+          <div id="u15_div" class=""></div>
+          <div id="u15_text" class="text">
+            <p class="mt-2 mb-2 ml-2">
+              <span>Create Your Account</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-container">
+      <div class="row">
+        <div class="col-sm-12 form-group">
+          <div id="u16" class="heading_3">
+            <div id="u16_text" class="text">
+              <span>Name</span>
+            </div>
+          </div>
+          <!-- Unnamed (Text Field) -->
+          <div id="u17" class="mt-1">
+            <input
+              id="u17_input"
+              type="text"
+              placeholder="First Name"
+              class="form-control w-50"
+              formControlName="firstName"
+            />
+          </div>
+
+          <!-- Unnamed (Text Field) -->
+          <div id="u18" class="mt-2">
+            <div id="u18_div" class=""></div>
+            <input
+              id="u18_input"
+              type="text"
+              placeholder="Last Name"
+              class="form-control w-50"
+              formControlName="lastName"
+            />
+          </div>
+        </div>
+      </div>
+      <!-- email -->
+      <div class="row">
+        <div class="col-sm-12">
+          <div id="u19" class="heading_3 mb-1">
+            <div id="u19_div" class=""></div>
+            <div id="u19_text" class="text">
+              <span>Email</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <!-- Unnamed (Text Field) -->
+          <div id="u20" class="mb-2">
+            <div id="u20_div" class=""></div>
+            <input
+              id="u20_input"
+              type="email"
+              value="Type your email"
+              class="form-control w-50"
+              formControlName="email"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!--  password -->
+      <div class="row">
+        <div class="col-sm-12">
+          <div id="u21" class="heading_3 mt-1">
+            <div id="u21_text" class="text">
+              <span>Password</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <!-- Unnamed (Text Field) -->
+          <div class="input-group">
+            <input
+              id="u22_input"
+              type="text"
+              placeholder="Type your password"
+              class="form-control"
+              formControlName="password"
+            />
+            <span class="input-group-addon mr-5"></span>
+            <input
+              id="u23_input"
+              type="text"
+              placeholder="Confirm your password"
+              class="form-control"
+              formControlName="rePassword"
+            />
+          </div>
+
+          <!-- Unnamed (Text Field) -->
+
+          <div id="u23" class="col-sm-4 mt-2">
+            <div id="u23_div" class=""></div>
+            <div id="u24_text" class="text" style="display: none; visibility: hidden;">
+              <p></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 mt-1">
+          <div id="u25" class="box_1">
+            <div id="u25_div" class=""></div>
+            <div class="row">
+              <div class="col-sm-12">
+                <span>&nbsp;Must be minimum of 8 characters </span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <span>&nbsp;Must contain upper &amp; lower case&nbsp; </span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <span>&nbsp;Must contain at least one number</span>
+              </div>
+            </div>
+            <div id="u25_text" class="text"></div>
+          </div>
+        </div>
+      </div>
+
+      <!--  select Country -->
+      <div class="row mt-2">
+        <div class="col-sm-12">
+          <div id="u6" class="heading_3">
+            <div id="u6_div" class=""></div>
+            <div id="u6_text" class="text">
+              <span>Select your Country</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <div id="u5" class="">
+            <div id="u5_div" class=""></div>
+            <select id="custom-select" class="custom-select" formControlName="country">
+              <option class="" value="United States">United States</option>
+              <option class="" value="Canada">Canada</option>
+              <option class="" value="England">England</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- profession -->
+      <div class="row mt-5">
+        <div class="col-md-6 col-sm-12">
+          <div class="card card-size">
+            <div class="card-body">
+              <h5 class="card-title">
+                <i class="fas fa-stethoscope lg"></i>
+                <span class="btn heading_3 text-wrap" style="width: 8.5rem;">HealthCare Prefessional</span>
+              </h5>
+              <p class="card-text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum l.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+          <div>
+            <div class="card card-size">
+              <div class="card-body">
+                <h5 class="card-title">
+                  <i class="fas fa-hospital-user lg"></i>
+                  <span class="btn heading_3" style="width: 8.5rem;">Patient</span>
+                </h5>
+                <p class="card-text">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum l.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-sm-12">
+          <div id="u30" class="text_field">
+            <div id="u30_div" class=""></div>
+            <p>
+              By clicking continue, you agree to our privacy policy and Terms of Use
+              <button class="text-danger btn btn-secondary btn-sm" (click)="continue(); $event.stopPropagation()">
+                Continue
+              </button>
+            </p>
+
+            <p></p>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="isContinue" class="row mt-4">
+        <div class="col-sm-6">
+          <div class="input-group">
+            <input
+              type="button"
+              class="btn btn-secondary btn-lg btn-block pb_btn-pill btn-shadow-blue"
+              value="Cancel"
+              (click)="reset()"
+            />
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="input-group">
+            <input
+              type="submit"
+              class="btn btn-primary btn-lg btn-block pb_btn-pill btn-shadow-blue"
+              value="Register"
+              [disabled]="!signupForm.valid"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

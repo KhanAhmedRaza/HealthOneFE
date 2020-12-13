@@ -10,10 +10,19 @@ const proxyConfig = [
   {
     context: '/api',
     pathRewrite: { '^/api': '' },
-    target: 'https://api.chucknorris.io',
+    // target: 'https://api.chucknorris.io',
+    target: 'http://localhost:8080/HealthOneTest2',
+    changeOrigin: true,
+    secure: false,
+  } /*,
+  {
+    context: '/api/assets',
+    pathRewrite: { '^/api/assets': '' },
+    // target: 'https://api.chucknorris.io',
+    target:'http://localhost:4200/',
     changeOrigin: true,
     secure: false
-  }
+  },*/,
 ];
 
 /*
@@ -30,7 +39,9 @@ function setupForCorporateProxy(proxyConfig) {
   if (proxyServer) {
     console.log(`Using corporate proxy server: ${proxyServer}`);
     agent = new HttpsProxyAgent(proxyServer);
-    proxyConfig.forEach(entry => { entry.agent = agent; });
+    proxyConfig.forEach((entry) => {
+      entry.agent = agent;
+    });
   }
 
   return proxyConfig;

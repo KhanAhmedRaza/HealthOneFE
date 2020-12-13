@@ -7,15 +7,16 @@ import { CredentialsService } from './credentials.service';
 const log = new Logger('AuthenticationGuard');
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthenticationGuard implements CanActivate {
-
-  constructor(private router: Router,
-              private credentialsService: CredentialsService) { }
+  constructor(private router: Router, private credentialsService: CredentialsService) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     if (this.credentialsService.isAuthenticated()) {
+      return true;
+    }
+    if (state.url == '/signup' || state.url == '/signup-success') {
       return true;
     }
 
@@ -23,5 +24,4 @@ export class AuthenticationGuard implements CanActivate {
     this.router.navigate(['/login'], { queryParams: { redirect: state.url }, replaceUrl: true });
     return false;
   }
-
 }
