@@ -1,35 +1,291 @@
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-sm-10 jumbotron">
-      <div class="d-flex justify-content-center h-100">
-        <div class="searchbar">
-          <input class="search_input" type="text" name="" placeholder="Search..." />
-          <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
+  <!--<div class="row">
+    <div class="col-sm-12">
+      <p class="text-center">Adverse Event Report Dashboard</p>
+    </div>
+  </div>-->
+  <form [formGroup]="homeForm" (ngSubmit)="submitForm()">
+    <div class="row">
+      <div class="col-sm-3 bg-light">
+        <!-- <div class="text-center">Data Filter Option</div>-->
+        <div class="sidebar-item">
+          <div class="make-me-sticky">
+            <div class="row">
+              <div class="col-sm-12">
+                <label class="">Patient Demographics</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <select class="form-control sb-font-color" formControlName="gender">
+                  <option value="" selected>Gender</option>
+                  <option *ngFor="let gen of dashboardResult.gender" [value]="gen.code">{{ gen.desc }}</option>
+                </select>
+              </div>
+            </div>
+            <!--  <div class="col-sm-1">
+              &nbsp;
+            </div>-->
+            <div class="row mt-2">
+              <div class="col-sm-12">
+                <select class="form-control" formControlName="ageGrp">
+                  <option value="" selected>Age Group</option>
+                  <option *ngFor="let grp of dashboardResult.ageGrps; let i = index" [value]="grp.ageGrp">{{
+                    grp.ageGrpDesc
+                  }}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row mt-2">
+              <div class="col-sm-12">
+                <label class="">Year</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <select class="form-control" formControlName="fromYear">
+                  <option value="" selected disabled>From</option>
+                  <option *ngFor="let year of years" [ngValue]="year" [selected]="year == selectedYear">{{
+                    year
+                  }}</option>
+                </select>
+              </div>
+              <!--  <div class="col-sm-1">
+                &nbsp;
+              </div>-->
+              <div class="col-sm-6">
+                <select class="form-control" formControlName="toYear">
+                  <option value="" selected disabled>To</option>
+                  <option *ngFor="let year of years" [ngValue]="year" [selected]="year == selectedYear">{{
+                    year
+                  }}</option>
+                  <!--<option [ngValue]="undefined" selected disabled>Quarter</option>
+            <option value="Q1">Q1</option>
+            <option value="HO">Q2</option>
+            <option value="OT">Q3 </option>
+            <option value="CA">Q4</option>-->
+                </select>
+              </div>
+            </div>
+
+            <div class="row mt-2">
+              <div class="col-sm-12">
+                <select class="form-control" multiple formControlName="quarter">
+                  <option value="Q1">Quarter 1</option>
+                  <option value="Q2">Quarter 2</option>
+                  <option value="Q3">Quarter 3</option>
+                  <option value="Q4">Quarter 4</option>
+                </select>
+              </div>
+            </div>
+            <!--locaition>-->
+            <div class="row mt-2">
+              <div class="col-sm-12">
+                <label class="">Location</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <select class="form-control" formControlName="location">
+                  <option value="" selected>Select Location</option>
+                  <!--<option *ngFor="let country of dashboardResult.countries" [value]="country.countryCode" >{{country.countryCode}}</option>-->
+                  <option value="D">Domestic</option>
+                  <option value="F">Foreign</option>
+                  <option value="U">Unspecified</option>
+                </select>
+              </div>
+            </div>
+
+            <!--<div class="row mt-2">
+        <div class="col-sm-12">
+          <select formControlName="Age" class="form-control" >
+            <option>Select State</option>
+            <option value="DE">Death</option>
+            <option value="HO">Hosptalization</option>
+            <option value="OT">Other </option>
+            <option value="CA">Congenital Anomaly</option>
+          </select>
+        </div>
+      </div>-->
+
+            <!--Medical Information>-->
+            <div class="row mt-2">
+              <div class="col-sm-12">
+                <label class="">Drug Information</label>
+              </div>
+            </div>
+            <div class="row mt-1">
+              <div class="col-sm-12">
+                <input
+                  id="typeahead-drug"
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="drugName"
+                  [ngbTypeahead]="search"
+                  placeholder="Filter By Drug"
+                  formControlName="drugName"
+                />
+              </div>
+            </div>
+
+            <div class="row mt-2">
+              <div class="col-sm-12">
+                <input
+                  id="typeahead-manu"
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="manufacturer"
+                  [ngbTypeahead]="searchManu"
+                  placeholder="Filter by Drug Manufacturer "
+                  formControlName="manufacturer"
+                />
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col-sm-12">
+                <label class="">Medical Information</label>
+              </div>
+            </div>
+            <div class="row mt-1">
+              <div class="col-sm-12">
+                <input
+                  id="typeahead-disease"
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="indicator"
+                  [ngbTypeahead]="searchDisease"
+                  type="text"
+                  placeholder="Filter by Disease"
+                  formControlName="indicator"
+                />
+              </div>
+            </div>
+
+            <div class="row mt-2">
+              <div class="col-sm-12">
+                <input
+                  id="typeahead-outcome"
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="outcome"
+                  [ngbTypeahead]="searchOutcome"
+                  placeholder="Filter by Outcome"
+                  formControlName="outcome"
+                />
+              </div>
+            </div>
+
+            <div class="row mt-2 mb-2">
+              <div class="col-sm-12">
+                <button type="submit" class="btn-sm btn-primary" [disabled]="!homeForm.valid">Apply Filter</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="col-sm-2">
-      <div class="sidenav">
-        <div class="heading_2">Filters</div>
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="ageCheck" />
-          <label class="form-check-label" for="ageCheck">Age</label>
+
+      <!--end of first col-->
+
+      <div class="col-sm-9 border">
+        <div class="row mt-1">
+          <div class="col-sm-12">
+            <label class="font-weight-bold">OSTF Analytics Dashboard</label>
+          </div>
         </div>
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="genderCheck" />
-          <label class="form-check-label" for="genderCheck">Gender</label>
+        <!--  <div class="d-flex justify-content-center h-100">-->
+        <!-- <img [src]="this.dashboardResult.dashboardImages" />-->
+
+        <div class="row mt-2">
+          <div class="col-sm-6 mt-4">
+            <div class="card border-0">
+              <div *ngIf="!this.dashboardResult.filteredData">
+                <img class="card-img-top" [src]="this.dashboardResult.img1" alt="Card image cap" />
+              </div>
+              <div *ngIf="this.dashboardResult.filteredData">
+                <iframe
+                  height="600"
+                  width="600"
+                  [src]="this.dashboardResult.link1"
+                  frameBorder="0"
+                  alt="Card image cap"
+                ></iframe>
+              </div>
+
+              <div class="card-body">
+                <p class="card-text">
+                  Some quick example text to build on the card title and make up the bulk of the card's content.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 mt-4">
+            <div class="card border-0">
+              <div *ngIf="!this.dashboardResult.filteredData">
+                <img class="card-img-top" [src]="this.dashboardResult.img2" alt="Card image cap" />
+              </div>
+              <div *ngIf="this.dashboardResult.filteredData">
+                <!-- <iframe class="card-img-top" [src]="this.dashboardResult.img2" alt="Card image cap"></iframe>-->
+              </div>
+
+              <div class="card-body">
+                <p class="card-text">
+                  Some quick example text to build on the card title and make up the bulk of the card's content.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="outcomeCheck" />
-          <label class="form-check-label" for="outcomeCheck">Outcomes</label>
+
+        <!-- third card -->
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="card border-0">
+              <img class="card-img-top" [src]="this.dashboardResult.img3" alt="Card image cap" />
+              <div class="card-body">
+                <p class="card-text">
+                  Some quick example text to build on the card title and make up the bulk of the card's content.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="reactionCheck" />
-          <label class="form-check-label" for="reactionCheck">Reactions</label>
+
+        <!-- fourth card-->
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="card border-0">
+              <img class="card-img-top" [src]="this.dashboardResult.img4" alt="Card image cap" />
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+            <div class="card border-0">
+              <div class="card-body">
+                <p class="card-text">
+                  Some quick example text to build on the card title and make up the bulk of the card's content.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
+
+        <!--<ngb-carousel #carousel [interval]="2000" [pauseOnHover]="pauseOnHover"  (slide)="onSlide($event)">
+          <ng-template ngbSlide *ngFor="let img of images; index as i">
+            <div class="carousel-caption">
+            </div>
+            <a href="" target="_blank" rel="nofollow noopener noreferrer">
+              <div class="picsum-img-wrapper">
+                <img [src]="img" class="logo" alt="My image {{i + 1}} description">
+              </div>
+            </a>
+          </ng-template>
+        </ngb-carousel>-->
+        <!--  -->
+        <!-- </div>-->
       </div>
     </div>
-  </div>
+  </form>
   <!--<div class="jumbotron text-center">
     <h1>
       <img class="logo" src="assets/OSFT-logo-01.png" alt="angular logo" />

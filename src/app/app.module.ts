@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { TranslateModule } from '@ngx-translate/core';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbTypeahead, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { environment } from '@env/environment';
@@ -41,6 +41,7 @@ import { ToastrModule } from 'ngx-toastr';
     BrowserAnimationsModule,
     AppRoutingModule,
     ToastrModule.forRoot(),
+    NgbTypeaheadModule,
     // must be imported as the last module as it contains the fallback route
   ],
   declarations: [AppComponent],

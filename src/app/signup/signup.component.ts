@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SignupService, User } from './signup.service';
-import { FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -14,17 +14,23 @@ import { ToastrService } from 'ngx-toastr';
 export class SignupComponent implements OnInit {
   user: User;
   isContinue: boolean;
-  signupForm = this.fb.group({
-    firstName: ['', Validators.required],
-    lastName: ['', Validators.required],
-    email: ['', Validators.required],
-    password: ['', Validators.required],
-    //profession: ['',Validators.required],
-    country: ['', Validators.required],
-    rePassword: ['', Validators.required],
-    //terms:['',Validators.required]
-  });
+  emailPattern: string = '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$';
+  passwordPattern: string = '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$';
 
+  signupForm = this.fb.group(
+    {
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.pattern(this.emailPattern)]],
+      password: ['', [Validators.required, Validators.minLength(8), Validators.pattern(this.passwordPattern)]],
+      profession: [''],
+      country: ['', Validators.required],
+      rePassword: ['', [Validators.required, Validators.minLength(8), Validators.pattern(this.passwordPattern)]],
+
+      //terms:['',Validators.required]
+    },
+    { validator: this.validateAreEqual }
+  );
   constructor(
     private _signUpService: SignupService,
     private fb: FormBuilder,
@@ -57,6 +63,7 @@ export class SignupComponent implements OnInit {
       (err) => {
         if (err != 401) {
           console.log('Error occurred');
+          this.showError();
         }
       }
     );
@@ -70,8 +77,8 @@ export class SignupComponent implements OnInit {
     return obj;
   }
 
-  continue() {
-    if (!this.signupForm.invalid) {
+  continue(event: any) {
+    if (!this.signupForm.invalid && event.target.checked) {
       this.isContinue = true;
     }
   }
@@ -86,7 +93,32 @@ export class SignupComponent implements OnInit {
     this.toastr.success('User is successfully added!', 'Success!');
   }
 
+  /*showError() {
+    this.toastr.error('User is successfully added!', 'Success!');
+  }*/
+
   showError() {
     this.toastr.error('Unable to add user!');
   }
+  onSelectCard(value: any) {
+    this.signupForm.value.profession = value;
+    console.log('profession ' + this.signupForm.value.profession);
+    console.log('value ' + value);
+  }
+
+  private validateAreEqual(frmGrp: FormGroup) {
+    return frmGrp.controls['password'].value !== frmGrp.controls['rePassword'].value
+      ? {
+          mismatch: true,
+        }
+      : null;
+  }
+
+  get email(): any {
+    return this.email.get('email');
+  }
+
+  /*getEmail() {
+    return this.signupForm.value.email;
+  }*/
 }

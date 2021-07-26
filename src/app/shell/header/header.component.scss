@@ -2,8 +2,20 @@
 
 .navbar {
   margin-bottom: $spacer;
+  min-height: 70px;
 }
-
+.navbar-color {
+  background-color: #258fea;
+}
 .nav-link.dropdown-toggle {
   cursor: pointer;
+}
+a {
+  color: #e9ecef;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+.white-color {
+  color: #ffffff;
 }

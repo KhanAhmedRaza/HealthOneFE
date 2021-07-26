@@ -1,12 +1,12 @@
 <!-- <div class="login-container bg-light">
 	<div class="login-box">
 		<div class="center">
-			<h1 class="text-center" translate>APP_NAME 
+			<h1 class="text-center" translate>APP_NAME
 			<img class="logo text-center" src="assets/OSTF-logo-acronym-web.jpg" alt="angular logo" />
 			</h1>
-   			 
+
 		</div>
-		
+
 		<div class="container">
 		<form class="" [formGroup]="signupForm" (ngSubmit)="register()">
 			<h2 class="mb-4 mt-0 text-center">Sign Up for Free</h2>
@@ -66,7 +66,7 @@
 <div id="base" class="container-fluid">
   <div class="signupheader">
     <img id="u1_img" class="logo mt-2 mb-2 ml-2" src="assets/u28.png" tabindex="0" />
-    <!--  <a class="navbar-brand"  translate>APP_NAME 
+    <!--  <a class="navbar-brand"  translate>APP_NAME
     </a> -->
   </div>
   <form [formGroup]="signupForm" (ngSubmit)="register()">
@@ -139,6 +139,14 @@
               formControlName="email"
             />
           </div>
+          <span
+            *ngIf="
+              !signupForm.controls.email.valid &&
+              (signupForm.controls['email'].dirty || signupForm.controls['email'].touched)
+            "
+          >
+            <span class="text-danger">Email not valid.</span>
+          </span>
         </div>
       </div>
 
@@ -158,7 +166,7 @@
           <div class="input-group">
             <input
               id="u22_input"
-              type="text"
+              type="password"
               placeholder="Type your password"
               class="form-control"
               formControlName="password"
@@ -166,7 +174,7 @@
             <span class="input-group-addon mr-5"></span>
             <input
               id="u23_input"
-              type="text"
+              type="password"
               placeholder="Confirm your password"
               class="form-control"
               formControlName="rePassword"
@@ -175,6 +183,32 @@
 
           <!-- Unnamed (Text Field) -->
 
+          <div
+            class="text-danger"
+            *ngIf="
+              signupForm.errors?.mismatch &&
+              (signupForm.controls['rePassword'].dirty || signupForm.controls['rePassword'].touched)
+            "
+          >
+            <div class="row">
+              <div class="col-sm-12">
+                Passwords don't match.
+              </div>
+            </div>
+          </div>
+          <div
+            class="text-danger"
+            *ngIf="
+              !signupForm.controls.password.valid &&
+              (signupForm.controls['password'].dirty || signupForm.controls['password'].touched)
+            "
+          >
+            <div class="row">
+              <div class="col-sm-12">
+                Password must match the criteria.
+              </div>
+            </div>
+          </div>
           <div id="u23" class="col-sm-4 mt-2">
             <div id="u23_div" class=""></div>
             <div id="u24_text" class="text" style="display: none; visibility: hidden;">
@@ -235,7 +269,7 @@
       <div class="row mt-5">
         <div class="col-md-6 col-sm-12">
           <div class="card card-size">
-            <div class="card-body">
+            <div class="card-body" (click)="onSelectCard('heatlhcare')">
               <h5 class="card-title">
                 <i class="fas fa-stethoscope lg"></i>
                 <span class="btn heading_3 text-wrap" style="width: 8.5rem;">HealthCare Prefessional</span>
@@ -243,13 +277,14 @@
               <p class="card-text">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum l.
               </p>
+              <span formControlName="profession" value="heatlhcare"></span>
             </div>
           </div>
         </div>
         <div class="col-md-6 col-sm-12">
           <div>
             <div class="card card-size">
-              <div class="card-body">
+              <div class="card-body" (click)="onSelectCard('patient')">
                 <h5 class="card-title">
                   <i class="fas fa-hospital-user lg"></i>
                   <span class="btn heading_3" style="width: 8.5rem;">Patient</span>
@@ -257,6 +292,7 @@
                 <p class="card-text">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum l.
                 </p>
+                <span formControlName="profession" value="patient"></span>
               </div>
             </div>
           </div>
@@ -267,10 +303,11 @@
           <div id="u30" class="text_field">
             <div id="u30_div" class=""></div>
             <p>
-              By clicking continue, you agree to our privacy policy and Terms of Use
-              <button class="text-danger btn btn-secondary btn-sm" (click)="continue(); $event.stopPropagation()">
+              By clicking checkbox, you agree to our privacy policy and Terms of Use
+              <!-- <button class="text-danger btn btn-secondary btn-sm" (click)="continue(); $event.stopPropagation()">
                 Continue
-              </button>
+              </button>-->
+              <input type="checkbox" (click)="continue($event)" />
             </p>
 
             <p></p>

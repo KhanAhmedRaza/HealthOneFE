@@ -16,7 +16,7 @@ export class AuthenticationGuard implements CanActivate {
     if (this.credentialsService.isAuthenticated()) {
       return true;
     }
-    if (state.url == '/signup' || state.url == '/signup-success') {
+    if (state.url == '/signup' || state.url == '/signup-success' || state.url === '/forgotPassword') {
       return true;
     }
 

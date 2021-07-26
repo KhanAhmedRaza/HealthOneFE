@@ -1,5 +1,5 @@
 .logo {
-  width: 100px;
+  width: 100%;
 }
 
 q {
@@ -78,4 +78,58 @@ q {
   color: #0276a8;
   font-size: 24px;
   text-align: left;
+}
+.filter-box {
+  border: 8px solid;
+  border-color: #ededed !important;
+}
+.form-control {
+  color: #17b3b8;
+  border: 1px solid;
+}
+
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #17b3b8;
+  opacity: 1; /* Firefox */
+}
+
+.img1 {
+  max-height: 365px;
+  max-width: 459px;
+}
+
+.img2 {
+  max-height: 459px;
+  max-width: 459px;
+}
+
+.img3 {
+  max-height: 259px;
+  max-width: 968px;
+}
+.img4 {
+  max-height: 365px;
+  max-width: 459px;
+}
+@media screen and (min-width: 575px) {
+  .sidebar-item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    /* Position the items */
+    // &:nth-child(2) { top: 25%; }
+    // &:nth-child(3) { top: 50%; }
+    // &:nth-child(4) { top: 75%; }
+  }
+  .make-me-sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+
+    padding: 0 15px;
+  }
 }

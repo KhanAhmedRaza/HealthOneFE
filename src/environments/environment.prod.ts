@@ -10,7 +10,8 @@ export const environment = {
   production: true,
   hmr: false,
   version: env.npm_package_version,
-  serverUrl: 'https://api.chucknorris.io',
+  //serverUrl: 'https://api.chucknorris.io',
+  serverUrl: 'http://ec2-18-220-88-231.us-east-2.compute.amazonaws.com:9000/healthone',
   defaultLanguage: 'en-US',
   supportedLanguages: ['en-US', 'fr-FR'],
 };
