@@ -16,6 +16,8 @@ export class SignupComponent implements OnInit {
   isContinue: boolean;
   emailPattern: string = '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$';
   passwordPattern: string = '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$';
+  isPatientCardActive: boolean;
+  isHealthCareCareActive: boolean;
 
   signupForm = this.fb.group(
     {
@@ -53,20 +55,24 @@ export class SignupComponent implements OnInit {
     this.user = this.strMapToObj(map);
     console.log('User' + this.user.email);
     this._signUpService.setUser(this.user);
-    //this.route.navigate(['/signup-success']);
-    this._signUpService.addUser(this.user).subscribe(
-      (data) => {
-        console.log('data' + data);
-        this.route.navigate(['/signup-success']);
-        this.showSuccess();
-      },
-      (err) => {
-        if (err != 401) {
-          console.log('Error occurred');
-          this.showError();
+    if (this.user.profession) {
+      this._signUpService.addUser(this.user).subscribe(
+        (data) => {
+          console.log('data' + data);
+          this.route.navigate(['/signup-success']);
+          this.showSuccess();
+        },
+        (err) => {
+          if (err != 401) {
+            console.log('Error occurred');
+            this.showError();
+          }
         }
-      }
-    );
+      );
+    } else {
+      this.toastr.error('please select profession');
+    }
+    //this.route.navigate(['/signup-success']);
   }
 
   strMapToObj(strMap: Map<string, string>) {
@@ -100,8 +106,20 @@ export class SignupComponent implements OnInit {
   showError() {
     this.toastr.error('Unable to add user!');
   }
-  onSelectCard(value: any) {
+  onHealthCareSelectCard(value: any) {
     this.signupForm.value.profession = value;
+    this.isHealthCareCareActive = true;
+    this.isPatientCardActive = false;
+    //this.selectedCard = 'selected-card';
+    console.log('profession ' + this.signupForm.value.profession);
+    console.log('value ' + value);
+  }
+
+  onPatientSelectCard(value: any) {
+    this.signupForm.value.profession = value;
+    this.isPatientCardActive = true;
+    this.isHealthCareCareActive = false;
+    //this.selectedCard = 'selected-card';
     console.log('profession ' + this.signupForm.value.profession);
     console.log('value ' + value);
   }

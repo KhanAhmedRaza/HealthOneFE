@@ -268,23 +268,23 @@
       <!-- profession -->
       <div class="row mt-5">
         <div class="col-md-6 col-sm-12">
-          <div class="card card-size">
-            <div class="card-body" (click)="onSelectCard('heatlhcare')">
+          <div class="card card-size" [ngClass]="isHealthCareCareActive ? 'selected-card' : null">
+            <div class="card-body" (click)="onHealthCareSelectCard('healthcare')">
               <h5 class="card-title">
                 <i class="fas fa-stethoscope lg"></i>
-                <span class="btn heading_3 text-wrap" style="width: 8.5rem;">HealthCare Prefessional</span>
+                <span class="btn heading_3 text-wrap" style="width: 8.5rem;">HealthCare Professional</span>
               </h5>
               <p class="card-text">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum l.
               </p>
-              <span formControlName="profession" value="heatlhcare"></span>
+              <span formControlName="profession" value="healthcare"></span>
             </div>
           </div>
         </div>
         <div class="col-md-6 col-sm-12">
           <div>
-            <div class="card card-size">
-              <div class="card-body" (click)="onSelectCard('patient')">
+            <div class="card card-size" [ngClass]="isPatientCardActive ? 'selected-card' : null">
+              <div class="card-body" (click)="onPatientSelectCard('patient')">
                 <h5 class="card-title">
                   <i class="fas fa-hospital-user lg"></i>
                   <span class="btn heading_3" style="width: 8.5rem;">Patient</span>
