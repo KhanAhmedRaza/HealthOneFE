@@ -14,8 +14,8 @@ import { ToastrService } from 'ngx-toastr';
 export class SignupComponent implements OnInit {
   user: User;
   isContinue: boolean;
-  emailPattern: string = '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$';
-  passwordPattern: string = '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$';
+  emailPattern = '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$';
+  passwordPattern = '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$';
   isPatientCardActive: boolean;
   isHealthCareCareActive: boolean;
 
@@ -46,7 +46,7 @@ export class SignupComponent implements OnInit {
     console.log('in register' + this.signupForm.value.firstName);
     let jsonVal: JSON = this.signupForm.value;
     let map = new Map();
-    for (let key in jsonVal) {
+    for (const key in jsonVal) {
       if (jsonVal[key] != null && jsonVal[key].length > 0) {
         map.set(key, jsonVal[key]);
       }
@@ -63,16 +63,14 @@ export class SignupComponent implements OnInit {
           this.showSuccess();
         },
         (err) => {
-          if (err != 401) {
-            console.log('Error occurred');
-            this.showError();
+          if (err !== 401) {
+            console.log('Error occurred while creating account');
           }
         }
       );
     } else {
       this.toastr.error('please select profession');
     }
-    //this.route.navigate(['/signup-success']);
   }
 
   strMapToObj(strMap: Map<string, string>) {
@@ -86,13 +84,14 @@ export class SignupComponent implements OnInit {
   continue(event: any) {
     if (!this.signupForm.invalid && event.target.checked) {
       this.isContinue = true;
+    } else {
+      this.isContinue = false;
     }
   }
 
   reset() {
     this.signupForm.reset();
     this.isContinue = false;
-    //this.signupForm.markAsUntouched();
   }
 
   showSuccess() {
@@ -103,8 +102,8 @@ export class SignupComponent implements OnInit {
     this.toastr.error('User is successfully added!', 'Success!');
   }*/
 
-  showError() {
-    this.toastr.error('Unable to add user!');
+  showError(message: string) {
+    this.toastr.error('Unable to add user!' + message);
   }
   onHealthCareSelectCard(value: any) {
     this.signupForm.value.profession = value;
@@ -119,7 +118,6 @@ export class SignupComponent implements OnInit {
     this.signupForm.value.profession = value;
     this.isPatientCardActive = true;
     this.isHealthCareCareActive = false;
-    //this.selectedCard = 'selected-card';
     console.log('profession ' + this.signupForm.value.profession);
     console.log('value ' + value);
   }
@@ -139,4 +137,9 @@ export class SignupComponent implements OnInit {
   /*getEmail() {
     return this.signupForm.value.email;
   }*/
+}
+
+export class OstfError {
+  errorMessage: string;
+  errorCode: string;
 }

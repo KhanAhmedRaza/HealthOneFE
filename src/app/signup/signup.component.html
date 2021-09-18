@@ -233,7 +233,7 @@
             </div>
             <div class="row">
               <div class="col-sm-12">
-                <span>&nbsp;Must contain at least one number</span>
+                <span>&nbsp;Must contain at least one number and one special character</span>
               </div>
             </div>
             <div id="u25_text" class="text"></div>
@@ -307,7 +307,7 @@
               <!-- <button class="text-danger btn btn-secondary btn-sm" (click)="continue(); $event.stopPropagation()">
                 Continue
               </button>-->
-              <input type="checkbox" (click)="continue($event)" />
+              <input type="checkbox" (click)="continue($event)" [disabled]="!signupForm.valid" />
             </p>
 
             <p></p>
