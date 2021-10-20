@@ -50,6 +50,7 @@ export class HomeComponent implements OnInit {
   constructor(private _dashboardService: DashboardService, private sanitizer: DomSanitizer, private fb: FormBuilder) {}
 
   formatter = (x: { drugName: string }) => x.drugName;
+  //@ts-ignore
   search = (text$: Observable<string>) =>
     text$.pipe(
       debounceTime(200),

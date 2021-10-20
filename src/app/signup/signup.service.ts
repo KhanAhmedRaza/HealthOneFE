@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, of, throwError as observableThrowError } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
 import { OstfError } from '@app/signup/signup.component';
 import { ToastrService } from 'ngx-toastr';
+import { Country, DashboardResult } from '@app/home/home.component';
 
 /*const routes = {
  u: User => `/user`,
@@ -26,6 +27,7 @@ export interface User {
 export class SignupService {
   private user: User;
   private error: OstfError;
+  private country: [];
 
   constructor(private httpClient: HttpClient, private toastr: ToastrService) {}
 
@@ -40,6 +42,14 @@ export class SignupService {
     );
   }
 
+  //@ts-ignore
+  getCountries(): Observable<Country[]> {
+    return this.httpClient.get<Country[]>('/countries').pipe(
+      map((data) => data),
+      catchError(this.handleError)
+    );
+  }
+
   getUser() {
     return this.user;
   }
@@ -50,5 +60,10 @@ export class SignupService {
 
   showError(message: string) {
     this.toastr.error('Unable to add user!' + message);
+  }
+
+  private handleError(res: HttpErrorResponse | any) {
+    console.error(res.error || res.body.error);
+    return observableThrowError(res.error || 'Server error');
   }
 }

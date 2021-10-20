@@ -5,6 +5,9 @@ import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { Country } from '@app/home/home.component';
 
 @Component({
   selector: 'app-signup',
@@ -18,6 +21,9 @@ export class SignupComponent implements OnInit {
   passwordPattern = '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$';
   isPatientCardActive: boolean;
   isHealthCareCareActive: boolean;
+  countries: Country[];
+  country: Country;
+  countryName: any;
 
   signupForm = this.fb.group(
     {
@@ -40,8 +46,24 @@ export class SignupComponent implements OnInit {
     private toastr: ToastrService
   ) {}
 
-  ngOnInit() {}
-
+  searchCountry = (text$: Observable<string>) =>
+    text$.pipe(
+      debounceTime(200),
+      distinctUntilChanged(),
+      map((term) =>
+        term.length < 2
+          ? []
+          : this.countries
+              .filter((v) => v.countryName.toLowerCase().indexOf(term.toLowerCase()) > -1)
+              .map((country) => country.countryName)
+              .slice(0, 10)
+      )
+    );
+  ngOnInit() {
+    this._signUpService.getCountries().subscribe((result) => {
+      this.countries = result;
+    });
+  }
   register() {
     console.log('in register' + this.signupForm.value.firstName);
     let jsonVal: JSON = this.signupForm.value;
@@ -53,7 +75,7 @@ export class SignupComponent implements OnInit {
     }
 
     this.user = this.strMapToObj(map);
-    console.log('User' + this.user.email);
+    console.log('User' + this.user.country);
     this._signUpService.setUser(this.user);
     if (this.user.profession) {
       this._signUpService.addUser(this.user).subscribe(

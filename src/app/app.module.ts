@@ -20,6 +20,7 @@ import { DrugModule } from './drug/drug.module';
 import { SignupModule } from './signup/signup.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { HealthModule } from './health/health.module';
 
 @NgModule({
   imports: [
@@ -38,10 +39,12 @@ import { ToastrModule } from 'ngx-toastr';
     AuthModule,
     DrugModule,
     SignupModule,
+    HealthModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     ToastrModule.forRoot(),
     NgbTypeaheadModule,
+
     // must be imported as the last module as it contains the fallback route
   ],
   declarations: [AppComponent],

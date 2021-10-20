@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { User } from '@app/signup/signup.service';
 import { DrugSearchObj, DrugSearchResult } from '@app/drug/drug-search/drug-search.component';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -33,5 +34,14 @@ export class DrugService {
       console.log(data);
       return data;
     })*/
+  }
+
+  getQuotes(): Observable<any> {
+    return this.httpClient.get<any>('https://type.fit/api/quotes').pipe(
+      map((body: any) => body),
+      catchError((err) => {
+        throw 'error in source. Details: ' + err;
+      })
+    );
   }
 }

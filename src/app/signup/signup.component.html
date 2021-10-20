@@ -65,7 +65,8 @@
 
 <div id="base" class="container-fluid">
   <div class="signupheader">
-    <img id="u1_img" class="logo mt-2 mb-2 ml-2" src="assets/u28.png" tabindex="0" />
+    <!-- <img id="u1_img" class="logo mt-2 mb-2 ml-2" src="assets/u28.png" tabindex="0" />-->
+    <img id="u2_img" class="logo mt-2 mb-2 ml-2" src="assets/health-harbour-signup.jpeg" tabindex="1" />
     <!--  <a class="navbar-brand"  translate>APP_NAME
     </a> -->
   </div>
@@ -256,11 +257,15 @@
         <div class="col-sm-12">
           <div id="u5" class="">
             <div id="u5_div" class=""></div>
-            <select id="custom-select" class="custom-select" formControlName="country">
-              <option class="" value="United States">United States</option>
-              <option class="" value="Canada">Canada</option>
-              <option class="" value="England">England</option>
-            </select>
+            <input
+              id="typeahead-drug"
+              type="text"
+              class="form-control"
+              [(ngModel)]="countryName"
+              [ngbTypeahead]="searchCountry"
+              placeholder="choose country"
+              formControlName="country"
+            />
           </div>
         </div>
       </div>
@@ -275,7 +280,7 @@
                 <span class="btn heading_3 text-wrap" style="width: 8.5rem;">HealthCare Professional</span>
               </h5>
               <p class="card-text">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum l.
+                Healthcare provider, such as Doctors, Nurse, Pharmacist
               </p>
               <span formControlName="profession" value="healthcare"></span>
             </div>
@@ -290,7 +295,7 @@
                   <span class="btn heading_3" style="width: 8.5rem;">Patient</span>
                 </h5>
                 <p class="card-text">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum l.
+                  Patients, Relatives or Others.
                 </p>
                 <span formControlName="profession" value="patient"></span>
               </div>

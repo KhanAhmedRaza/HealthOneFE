@@ -5,11 +5,15 @@
     </h1>
     <p><i class="far fa-bookmark"></i> <span translate>Version</span> {{ version }}</p>
   </div>
-  <iframe
-    style="overflow-wrap"
-    width="300"
-    height="200"
-    src="http://18.117.72.207:5444/static/Forecast_1623868302.html"
-    alt="Card image cap"
-  ></iframe>
+  <form>
+    <div>
+      <p>today's quote is</p>
+      <span>{{ quote?.text }}</span>
+      <br />
+      <span> {{ quote?.author }}</span>
+      <br />
+      <input type="button" value="prev" (click)="prevQuote()" [disabled]="disablePrev" />
+      <input type="button" value="next" (click)="nextQuote()" [disabled]="disableNext" />
+    </div>
+  </form>
 </div>

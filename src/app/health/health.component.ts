@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-
 import { environment } from '@env/environment';
 import { DrugService } from '@app/drug/drug.service';
 
 @Component({
-  selector: 'app-about',
-  templateUrl: './about.component.html',
-  styleUrls: ['./about.component.scss'],
+  selector: 'app-health',
+  templateUrl: './health.component.html',
+  styleUrls: ['./health.component.scss'],
 })
-export class AboutComponent implements OnInit {
+export class HealthComponent implements OnInit {
   version: string | null = environment.version;
   quotes: [];
   quote: any;
@@ -21,9 +20,9 @@ export class AboutComponent implements OnInit {
     this.drugService.getQuotes().subscribe((result) => {
       this.quotes = result.splice(0, 5);
       /* result.forEach((res:any) => {
-        // @ts-ignore
-        this.quotes.push(res);
-      })*/
+         // @ts-ignore
+         this.quotes.push(res);
+       })*/
       // @ts-ignore
       this.quote = this.quotes[0];
     });
