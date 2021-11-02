@@ -6,7 +6,7 @@
     <p><i class="far fa-bookmark"></i> <span translate>Version</span> {{ version }}</p>
   </div>
   <form>
-    <div>
+    <div class="mb-3">
       <p>today's quote is</p>
       <span>{{ quote?.text }}</span>
       <br />
@@ -16,4 +16,34 @@
       <input type="button" value="next" (click)="nextQuote()" [disabled]="disableNext" />
     </div>
   </form>
+  <ngx-charts-bar-vertical
+    [view]="view"
+    [scheme]="colorScheme"
+    [results]="single"
+    [gradient]="gradient"
+    [xAxis]="showXAxis"
+    [yAxis]="showYAxis"
+    [legend]="showLegend"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxisLabel]="xAxisLabel"
+    [yAxisLabel]="yAxisLabel"
+    (select)="onSelect($event)"
+  >
+  </ngx-charts-bar-vertical>
+  <div class="mb-3"></div>
+  <ngx-charts-pie-chart
+    [view]="view"
+    [scheme]="colorScheme"
+    [results]="single"
+    [gradient]="gradient"
+    [legend]="showLegend"
+    [legendPosition]="legendPosition"
+    [labels]="showLabels"
+    [doughnut]="isDoughnut"
+    (select)="onSelect($event)"
+    (activate)="onActivate($event)"
+    (deactivate)="onDeactivate($event)"
+  >
+  </ngx-charts-pie-chart>
 </div>
