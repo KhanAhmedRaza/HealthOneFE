@@ -1,4 +1,4 @@
-# ngX Starter Kit
+# Health One
 
 Web project starter kit including modern tools and workflow based on
 [angular-cli](https://github.com/angular/angular-cli), best practices from the community, a scalable base template and
